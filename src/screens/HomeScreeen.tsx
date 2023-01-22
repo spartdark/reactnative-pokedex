@@ -1,11 +1,13 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {usePokemonPaginated} from '../hooks/usePokemonPaginated';
 import {styles} from '../theme/appTheme';
 
 export const HomeScreen = () => {
   //destructurar el top del safe area
   const {top} = useSafeAreaInsets();
+  usePokemonPaginated();
 
   return (
     <View>
