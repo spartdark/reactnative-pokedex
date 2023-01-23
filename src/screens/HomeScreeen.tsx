@@ -7,6 +7,7 @@ import {SimplePokemon} from '../interfaces/pokemonInterfaces';
 import {FlatList} from 'react-native-gesture-handler';
 import {pokemonAPI} from '../api/pokemonApi';
 import {FadeInImage} from '../components/FadeInImage';
+import {PokemonCard} from '../components/PokemonCard';
 
 export const HomeScreen = () => {
   //destructurar el top del safe area
@@ -24,16 +25,23 @@ export const HomeScreen = () => {
         data={simplePokemonList}
         keyExtractor={pokemonAPI => pokemonAPI.pokemonId}
         showsVerticalScrollIndicator={false}
-        //renderItem={({item}) => <Text>{item.name}</Text>}
-        renderItem={({item}) => (
-          <FadeInImage
-            uri={item.pokemonPicture}
-            //source={{uri: item.pokemonPicture}}
+        numColumns={2}
+        //Header
+        ListHeaderComponent={
+          <Text
             style={{
-              width: 100,
-              height: 100,
-            }}></FadeInImage>
-        )}
+              //destructuro las propiedades
+              //primero las desestructuraciones y luego las modificaciones
+              ...styles.globalMargin,
+              ...styles.gnralTittle,
+              top: top + 20,
+              marginBottom: top + 20,
+            }}>
+            Pokedex
+          </Text>
+        }
+        //renderItem={({item}) => <Text>{item.name}</Text>}
+        renderItem={({item}) => <PokemonCard pokemon={item} />}
         //infinite Scrool
         onEndReached={loadPokemons}
         onEndReachedThreshold={0.4}
@@ -41,16 +49,6 @@ export const HomeScreen = () => {
           <ActivityIndicator style={{height: 100}} size={20} color="grey" />
         }
       />
-      {/* <Text
-        style={{
-          //destructuro las propiedades
-          //primero las desestructuraciones y luego las modificaciones
-          ...styles.globalMargin,
-          ...styles.gnralTittle,
-          top: top + 20,
-        }}>
-        Pokedex
-      </Text> */}
     </View>
   );
 };
