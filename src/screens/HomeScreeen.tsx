@@ -21,34 +21,40 @@ export const HomeScreen = () => {
         source={require('../assets/pokebola.png')}
         style={styles.pokebolaBG}
       />
-      <FlatList
-        data={simplePokemonList}
-        keyExtractor={pokemonAPI => pokemonAPI.pokemonId}
-        showsVerticalScrollIndicator={false}
-        numColumns={2}
-        //Header
-        ListHeaderComponent={
-          <Text
-            style={{
-              //destructuro las propiedades
-              //primero las desestructuraciones y luego las modificaciones
-              ...styles.globalMargin,
-              ...styles.gnralTittle,
-              top: top + 20,
-              marginBottom: top + 20,
-            }}>
-            Pokedex
-          </Text>
-        }
-        //renderItem={({item}) => <Text>{item.name}</Text>}
-        renderItem={({item}) => <PokemonCard pokemon={item} />}
-        //infinite Scrool
-        onEndReached={loadPokemons}
-        onEndReachedThreshold={0.4}
-        ListFooterComponent={
-          <ActivityIndicator style={{height: 100}} size={20} color="grey" />
-        }
-      />
+      <View
+        style={{
+          alignItems: 'center',
+        }}>
+        <FlatList
+          data={simplePokemonList}
+          keyExtractor={pokemonAPI => pokemonAPI.pokemonId}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          //Header
+          ListHeaderComponent={
+            <Text
+              style={{
+                //destructuro las propiedades
+                //primero las desestructuraciones y luego las modificaciones
+                ...styles.globalMargin,
+                ...styles.gnralTittle,
+                top: top + 20,
+                paddingBottom: 10,
+                marginBottom: top + 20,
+              }}>
+              Pokedex
+            </Text>
+          }
+          //renderItem={({item}) => <Text>{item.name}</Text>}
+          renderItem={({item}) => <PokemonCard pokemon={item} />}
+          //infinite Scrool
+          onEndReached={loadPokemons}
+          onEndReachedThreshold={0.4}
+          ListFooterComponent={
+            <ActivityIndicator style={{height: 100}} size={20} color="grey" />
+          }
+        />
+      </View>
     </View>
   );
 };
